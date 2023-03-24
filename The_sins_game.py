@@ -7,17 +7,24 @@ import random as rnd
 #Later i will add card's special effect as method to call when the card is played (so the card is instanced) but at the moment 
 #the only thing i want to ask about is the "value check"
 
+# Need to implement:
+# -Peccati
+# -Punizioni
+# -Better game handling
 
 ########## CLASSES #####################    
 class Player:
-    player_deck = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] #every element correspond to a card
-    player_drafted = []
-    player_points = 0
-    delta_points = 0 #the points calculated during the turn go here and at the end of the turn player_points += delta point and reset delta_points to zero
+     #the points calculated during the turn go here and at the end of the turn player_points += delta point and reset delta_points to zero
 
-    def __init__(self, name) -> None:
+    def __init__(self, name, is_peccatore) -> None:
+
+        self.player_drafted = []
+        self.player_points = 0
+        self.delta_points = 0
+        self.player_deck = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
         self.name = name
-            
+        self.is_peccatore = is_peccatore
+
     def play_a_card(self):
         #to simulate games every player play a random card
         played_card = rnd.choice(self.player_deck)
@@ -229,17 +236,13 @@ def play_a_turn(peccatore: Player, player1: Player, player2: Player):
     print_points(peccatore, player1, player2)
 
 ##########INSTANCES#####################    
-peccatore = Player("peccatore")
-Gianni = Player("Gianni")
-Pippo = Player("Pippo")
+Muschio = Player("peccatore", True)
+Gianni = Player("Gianni", False)
+Pippo = Player("Pippo", False)
 
 
 #simulation of some turns
-play_a_turn(peccatore, Gianni, Pippo)
-print_decks(peccatore)
-print_decks(Gianni)
-print_decks(Pippo)
-play_a_turn(peccatore, Gianni, Pippo)
-print_decks(peccatore)
-print_decks(Gianni)
-print_decks(Pippo)
+play_a_turn(Muschio, Gianni, Pippo)
+play_a_turn(Muschio, Gianni, Pippo)
+play_a_turn(Muschio, Gianni, Pippo)
+
